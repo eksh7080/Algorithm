@@ -122,3 +122,87 @@ def solution(num, n):
 # 베스트 풀이  
 # not의 존재를 이제 알았다.
     return int(not(num % n))
+
+
+"""
+[문제]
+길이가 같은 두 문자열 str1과 str2가 주어집니다.
+
+두 문자열의 각 문자가 앞에서부터 서로 번갈아가면서 한 번씩 등장하는 문자열을 만들어 return 하는 solution 함수를 완성해 주세요.
+
+[예시]
+"aaaaa"	"bbbbb"  ->	"ababababab"
+"""
+
+# 내풀이
+def solution(str1, str2):
+    
+    str = ''
+    
+    for i in range(len(str1)):
+        str += str1[i] + str2[i]
+        
+    return str
+
+# 인상적인 풀이 zip -> 두개의 배열 리스트를 묶어주는 함수
+def solution(str1, str2):
+    return ''.join(i+j for i,j in zip(str1,str2))
+
+"""
+[문제]
+정수 number와 n, m이 주어집니다. number가 n의 배수이면서 m의 배수이면 1을 아니라면 0을 return하도록 solution 함수를 완성해주세요.
+
+[예시]
+60	2	3	-> 1
+55	10	5	-> 0
+"""
+
+# 내풀이
+def solution(number, n, m):
+    if number % n == 0 and number % m == 0:
+        return 1
+    else:
+        return 0
+    
+# 베스트 풀이
+# 심플 이즈 베스트 별 다를바 없다.
+    return 1 if number%n==0 and number%m==0 else 0
+
+
+"""
+[문제]
+양의 정수 n이 매개변수로 주어질 때, n이 홀수라면 n 이하의 홀수인 모든 양의 정수의 합을 return 하고 
+n이 짝수라면 n 이하의 짝수인 모든 양의 정수의 제곱의 합을 return 하는 solution 함수를 작성해 주세요.
+
+[예시]
+7 -> 16
+10 -> 220
+"""
+
+# 내풀이
+def solution(n):
+    
+    divided = 'even' if n % 2 == 0 else 'odd'
+    sum = 0
+    
+    for i in range(n + 1):
+        if divided == 'even' and i != 1:
+            i = i if i % 2 == 0 else 0
+            sum += i**2
+        elif divided == 'odd':
+            i = i if i % 2 == 1 else 0
+            sum += i
+            
+    return sum
+                
+
+# 인상적인 풀이
+# sum 사용 유무가 포인트인거 같다.
+def solution(n):
+    # 풀이 1 -> 홀짝 구분을 이렇게도 한다.
+    if n%2:
+        return sum(range(1,n+1,2))
+    return sum([i*i for i in range(2,n+1,2)])
+
+    # 풀이 2 창의적임
+    return sum(x ** (2 - x % 2) for x in range(n + 1) if n % 2 == x % 2)
