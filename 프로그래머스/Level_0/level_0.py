@@ -206,3 +206,58 @@ def solution(n):
 
     # 풀이 2 창의적임
     return sum(x ** (2 - x % 2) for x in range(n + 1) if n % 2 == x % 2)
+
+
+"""
+[문제]
+문자열에 따라 다음과 같이 두 수의 크기를 비교하려고 합니다.
+
+두 수가 n과 m이라면
+">", "=" : n >= m
+"<", "=" : n <= m
+">", "!" : n > m
+"<", "!" : n < m
+두 문자열 ineq와 eq가 주어집니다. ineq는 "<"와 ">"중 하나고, eq는 "="와 "!"중 하나입니다. 
+그리고 두 정수 n과 m이 주어질 때, n과 m이 ineq와 eq의 조건에 맞으면 1을 아니면 0을 return하도록 solution 함수를 완성해주세요.
+
+[예시]
+"<"	"="	20	50	-> 1
+">"	"!"	41	78	-> 0
+"""
+
+# 내풀이 - 정석 그 자체
+def solution(ineq, eq, n, m):
+    if ineq == ">" and eq == "=":
+        return int(n >= m)
+    elif ineq == "<" and eq == "=":
+        return int(n <= m)
+    elif ineq == "<" and eq == "!":
+        return int(n < m) 
+    elif ineq == ">" and eq == "!":
+        return int(n > m)
+
+
+# 베스트 풀이 - eval 이라는 함수에 대해 몰랐다.
+# 파이썬에서 사용가능한 문자열에 대한 식을 모두 계산해준다고 한다.
+    return int(eval(str(n)+ineq+eq.replace('!', '')+str(m)))
+
+
+"""
+[문제]
+두 정수 a, b와 boolean 변수 flag가 매개변수로 주어질 때, 
+flag가 true면 a + b를 false면 a - b를 return 하는 solution 함수를 작성해 주세요.
+
+[예시]
+-4	7	true	-> 3
+-4	7	false	-> -11
+"""
+# 내 풀이
+# 이게 곧 베스트, 삼항 연산자 사용
+def solution(a, b, flag):
+    return a+b if flag else a-b 
+
+
+
+
+
+
